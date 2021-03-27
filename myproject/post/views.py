@@ -20,4 +20,6 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     lookup_field = 'slug'
 
-    permission_classes = [AllowAny]
+    #permission_classes = [AllowAny]
+    #! to secure this part we need to use IsAuthorReadOnly
+    permission_classes = [IsAuthorReadOnly]
