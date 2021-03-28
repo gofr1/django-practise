@@ -19,6 +19,7 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 from post.views import PostViewSet
+from app.views import hello
 
 router = SimpleRouter()
 router.register('posts', PostViewSet)
@@ -28,4 +29,5 @@ urlpatterns = [
     path('appstaff/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
+    path('hello/', hello),
 ]
