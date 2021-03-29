@@ -48,3 +48,26 @@ def test_response_content(client, author):
 
     assert len(response.json()) == 1
     assert response.json()[0] == expected_post
+
+
+@pytest.mark.django_db
+def test_post_content(client, author):
+    post = PostFactory(author=author, text='hey')
+    client.force_login(author)
+    response = client.get('/posts/')
+
+    assert response.status_code == status.HTTP_200_OK
+    assert len(response.json()) == 1
+    assert  response.json()[0] == {'author': author.username, 'text': 'hey', 'created': post.created.strftime('%a, %d %b %Y')}
+
+# pytest 
+#* ============================================ test session starts =============================================
+#* platform linux -- Python 3.8.3, pytest-5.4.3, py-1.9.0, pluggy-0.13.1
+#* django: settings: myproject.settings (from env)
+#* rootdir: /home/user/git/django-practice/myproject
+#* plugins: dash-1.12.0, Faker-6.6.3, django-4.1.0
+#* collected 4 items                                                                                            
+#* 
+#* post/tests/test_permissions.py ....                                                                    [100%]
+#* 
+#* ============================================= 4 passed in 1.32s ==============================================
