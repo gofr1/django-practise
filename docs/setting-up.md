@@ -78,6 +78,8 @@ In `urls.py` change the default path to `/admin`:
 
 Also it is a good practice to keep log of what IPs a trying to enter `/admin`.
 
+    export DJANGO_SETTINGS_MODULE=myproject.settings
+
 # Check if project is working
 
 Run below command to start server:
