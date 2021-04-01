@@ -31,4 +31,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('hello/', av.hello),
     re_path(r'^number/(\d+)/', av.viewNumber),
+    re_path(r'^date/(\d{1,5})/(\d{1,2})/(\d{1,2})', av.viewDate),
 ]
