@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from datetime import date, datetime
 from django.shortcuts import render
 
+from random import randint
+
 def hello(request):
    text = """<h1>Welcome to my app!</h1>"""
    return HttpResponse(text)
@@ -28,3 +30,7 @@ def viewCurrentTime(request):
 
 def viewString(request, string):
    return render(request, 'string.html', {"string" : string})
+
+def viewTagsIf(request):
+   random_number = randint(1,1000)
+   return render(request, 'if-case.html', {"random_number" : random_number})
