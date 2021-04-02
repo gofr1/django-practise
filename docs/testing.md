@@ -19,3 +19,11 @@ After running `pytest` in a project directory you will get:
     E        +  and   403 = status.HTTP_403_FORBIDDEN
 
 Fixing the issue in `views.py` and all works fine!
+
+## Troubleshoting
+
+If tests doesn't work in a project directory run:
+
+    export DJANGO_SETTINGS_MODULE=myproject.settings
+
+Then run `pytest`.

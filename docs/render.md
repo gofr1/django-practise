@@ -18,3 +18,17 @@ This function takes three parameters:
 Django’s template engine offers a mini-language to define the user-facing layer of the application.
 
 A variable looks like this: `{{variable}}`. The template replaces the variable by the variable sent by the view in the third parameter of the render function. 
+
+## Filters
+
+They help you modify variables at display time. Filters structure looks like the following: `{{var|filters}}`
+
+Some examples:
+
+- `{{string|truncatewords:80}}` - This filter will truncate the string, so you will see only the first 80 words.
+
+- `{{string|lower}}` - Converts the string to lowercase.
+
+- `{{string|escape|linebreaks}}` - Escapes string contents, then converts line breaks to tags.
+
+You can also set the default for a variable.
