@@ -33,4 +33,5 @@ urlpatterns = [
     re_path(r'^number/(\d+)/', av.viewNumber),
     re_path(r'^date/(\d{1,5})/(\d{1,2})/(\d{1,2})', av.viewDate),
     path('today/', av.viewCurrentTime),
+    re_path(r'^string/(.*)/', av.viewString),
 ]
