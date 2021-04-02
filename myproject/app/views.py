@@ -25,3 +25,6 @@ def viewDate(request, year, month, day):
 def viewCurrentTime(request):
    today = datetime.now().date()
    return render(request, 'today.html', {"today" : today})
+
+def viewString(request, string):
+   return render(request, 'string.html', {"string" : string})
