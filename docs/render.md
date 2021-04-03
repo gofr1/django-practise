@@ -32,3 +32,13 @@ Some examples:
 - `{{string|escape|linebreaks}}` - Escapes string contents, then converts line breaks to tags.
 
 You can also set the default for a variable.
+
+## Tags
+
+Tags lets you perform the following operations: 
+
+- if condition, 
+- for loop, 
+- template inheritance 
+
+and more.

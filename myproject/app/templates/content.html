@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+{% block title %}This is a good title{% endblock %}
+{% block content %}
+
+<p>Today is {{today}}</p>
+
+<div>
+   {% for article in articles %}
+   <h2>{{article.title}}</h2>
+   <p>{{article.text}}</p>
+</div>
+
+{% endfor %}
+{% endblock %}
