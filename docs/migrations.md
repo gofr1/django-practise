@@ -111,3 +111,20 @@ To check records you can use:
     Article.objects.all() 
 
     Article.objects.all().values()
+
+## Updating objects
+
+    >>>python3 manage.py shell
+    Python 3.8.3 (default, May 19 2020, 17:04:53) 
+    Type 'copyright', 'credits' or 'license' for more information
+    IPython 7.13.0 -- An enhanced Interactive Python. Type '?' for help.
+    
+    In [1]: from app.models import Article                                                                        
+    
+    In [2]: record = Article.objects.get(article_id="A0003")                                                      
+    
+    In [3]: record.title = 'Hamlet'                                                                               
+    
+    In [4]: record.save()                                                                                         
+    
+    In [5]: quit()      
