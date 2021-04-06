@@ -36,4 +36,5 @@ urlpatterns = [
     re_path(r'^string/(.*)/', av.viewString),
     path('random/', av.viewTagsIf),
     path('articles/', av.viewContent),
+    path('postarticle/', av.showForm),
 ]

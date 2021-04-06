@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from random import randint
 from app.models import Article
-
+from app.forms import ArticleForm
 
 def hello(request):
    text = """<h1>Welcome to my app!</h1>"""
@@ -41,3 +41,17 @@ def viewContent(request):
    today = datetime.now().date()
    articles = Article.objects.all()
    return render(request, "content.html", {"today" : today, "articles" : articles})
+
+def showForm(request):
+   # if this is a POST request we need to process the form data
+   if request.method == 'POST':
+      # create a form instance and populate it with data from the request:
+      form = ArticleForm(request.POST)
+      # check whether it's valid:
+      if form.is_valid():
+         form.save()
+      return render(request, 'thanks.html')
+   else:
+      form = ArticleForm()
+      return render(request, 'article.html', {'form': form})
+  
