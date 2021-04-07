@@ -27,7 +27,8 @@ router.register('posts', PostViewSet)
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('appstaff/', admin.site.urls),
-    path('', include(router.urls)),
+    #path('', include(router.urls)),
+    path('', av.mainPage),
     path('api-auth/', include('rest_framework.urls')),
     path('hello/', av.hello),
     re_path(r'^number/(\d+)/', av.viewNumber),
@@ -36,5 +37,6 @@ urlpatterns = [
     re_path(r'^string/(.*)/', av.viewString),
     path('random/', av.viewTagsIf),
     path('articles/', av.viewContent),
+    re_path(r'^article/(.*)/', av.searchArticle),
     path('postarticle/', av.showForm),
 ]

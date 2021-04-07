@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from datetime import date, datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from random import randint
 from app.models import Article
@@ -54,4 +54,6 @@ def showForm(request):
    else:
       form = ArticleForm()
       return render(request, 'article.html', {'form': form})
-  
+
+def mainPage(request):
+   return redirect(hello)
