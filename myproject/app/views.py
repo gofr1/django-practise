@@ -57,3 +57,7 @@ def showForm(request):
 
 def mainPage(request):
    return redirect(hello)
+
+def searchArticle(request, article_id):
+   article = Article.objects.get(article_id = article_id)
+   return render(request, 'show-article.html', {'article': article})
