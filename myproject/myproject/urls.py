@@ -39,4 +39,6 @@ urlpatterns = [
     path('articles/', av.viewContent),
     path('postarticle/', av.showForm),
     re_path(r'^article/(.*)/', av.searchArticle),
+    path('your-name/', av.get_name),
+    path('thanks/', av.thanksPage),
 ]
