@@ -41,4 +41,5 @@ urlpatterns = [
     re_path(r'^article/(.*)/', av.searchArticle),
     path('your-name/', av.get_name),
     path('thanks/', av.thanksPage),
+    path('statics/', av.StaticView.as_view())
 ]
