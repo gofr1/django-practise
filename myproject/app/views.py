@@ -6,6 +6,13 @@ from random import randint
 from app.models import Article
 from app.forms import ArticleForm, NameForm
 
+from django.shortcuts import render
+
+
+from django.views.generic import TemplateView
+
+class StaticView(TemplateView):
+   template_name = 'static.html'
 
 def hello(request):
    text = """<h1>Welcome to my app!</h1>"""
