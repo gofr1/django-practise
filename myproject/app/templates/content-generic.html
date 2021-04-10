@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+{% block title %}Articles generic{% endblock %}
+{% block content %}
+
+{% for article in articles_objects %}
+<div>
+   <h3>{{article.article_id}} - {{article.title}}</h3>
+   <p>{{article.text}}</p>
+</div>
+
+{% endfor %}
+{% endblock %}

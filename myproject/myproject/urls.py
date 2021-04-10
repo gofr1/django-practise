@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 
 from rest_framework.routers import SimpleRouter
+from django.views.generic import ListView
 
 from post.views import PostViewSet
 import app.views as av
+from app.models import Article
 
 router = SimpleRouter()
 router.register('posts', PostViewSet)
@@ -41,5 +43,7 @@ urlpatterns = [
     re_path(r'^article/(.*)/', av.searchArticle),
     path('your-name/', av.get_name),
     path('thanks/', av.thanksPage),
-    path('statics/', av.StaticView.as_view())
+    path('statics/', av.StaticView.as_view()),
+    #path('articles-generic/', ListView.as_view(model = Article, template_name = 'content-generic.html')),
+    path('articles-generic/', ListView.as_view(model = Article, template_name = 'content-generic.html', context_object_name = 'articles_objects')),
 ]
