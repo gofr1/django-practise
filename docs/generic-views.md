@@ -55,3 +55,61 @@ No change in the `views.py` change the `urls.py` file to be:
     from django.conf.urls import patterns, url
     
     urlpatterns = re_path(r'^statics/',TemplateView.as_view(template_name = 'static.html'))
+
+## List and Display Data from DB
+
+We are going to list all entries in our `Article` model. It is easy to do by using the `ListView` generic view class. 
+
+`urls.py`
+
+    from django.views.generic import ListView
+    
+    urlpatterns = [
+       ...
+       path('articles-generic/', ListView.as_view(model = Article, template_name = 'content-generic.html')),
+    ]
+
+The associated template
+
+`content-generic.html`
+
+    {% extends "main.html" %}
+    {% block title %}Articles generic{% endblock %}
+    {% block content %}
+    
+    {% for article in object_list %}
+    <div>
+       <h3>{{article.article_id}} - {{article.title}}</h3>
+       <p>{{article.text}}</p>
+    </div>
+    
+    {% endfor %}
+    {% endblock %}
+
+Important to note at this point is that the variable pass by the generic view to the template is `object_list`. If you want to name it yourself, you will need to add a `context_object_name` argument to the `as_view` method.
+
+`urls.py`
+
+    from django.views.generic import ListView
+    
+    urlpatterns = [
+       ...
+       path('articles-generic/', ListView.as_view(model = Article, template_name = 'content-generic.html', context_object_name = 'articles_objects')),
+    ]
+
+The associated template
+
+`content-generic.html`
+
+    {% extends "main.html" %}
+    {% block title %}Articles generic{% endblock %}
+    {% block content %}
+    
+    {% for article in articles_objects %}
+    <div>
+       <h3>{{article.article_id}} - {{article.title}}</h3>
+       <p>{{article.text}}</p>
+    </div>
+    
+    {% endfor %}
+    {% endblock %}
