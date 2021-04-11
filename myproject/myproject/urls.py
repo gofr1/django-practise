@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 
 from rest_framework.routers import SimpleRouter
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from post.views import PostViewSet
 import app.views as av
@@ -46,4 +46,6 @@ urlpatterns = [
     path('statics/', av.StaticView.as_view()),
     #path('articles-generic/', ListView.as_view(model = Article, template_name = 'content-generic.html')),
     path('articles-generic/', ListView.as_view(model = Article, template_name = 'content-generic.html', context_object_name = 'articles_objects')),
+    path('upload/', TemplateView.as_view(template_name = 'picture-upload.html')),
+    path('saved/', av.SavePicture)
 ]

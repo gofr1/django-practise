@@ -8,3 +8,7 @@ class ArticleForm(forms.ModelForm):
    
 class NameForm(forms.Form):
     your_name = forms.CharField(label='Your name', max_length=100)
+
+class PictureUploadForm(forms.Form):
+   name = forms.CharField(max_length = 100)
+   picture = forms.ImageField()

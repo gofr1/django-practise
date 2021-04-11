@@ -3,8 +3,8 @@ from datetime import date, datetime
 from django.shortcuts import render, redirect
 
 from random import randint
-from app.models import Article
-from app.forms import ArticleForm, NameForm
+from app.models import Article, Images
+from app.forms import ArticleForm, NameForm, PictureUploadForm
 
 from django.shortcuts import render
 
@@ -84,3 +84,21 @@ def get_name(request):
 
 def thanksPage(request):
    return render(request, 'thanks.html')
+
+def SavePicture(request):
+   saved = False
+   
+   if request.method == "POST":
+      #Get the posted form
+      MyPictureUploaForm = PictureUploadForm(request.POST, request.FILES)
+      
+      if MyPictureUploaForm.is_valid():
+         uploads = Images()
+         uploads.name = MyPictureUploaForm.cleaned_data["name"]
+         uploads.picture = MyPictureUploaForm.cleaned_data["picture"]
+         uploads.save()
+         saved = True
+   else:
+      MyPictureUploaForm = PictureUploadForm()
+		
+   return render(request, 'saved.html', locals())

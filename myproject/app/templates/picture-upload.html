@@ -1,0 +1,11 @@
+<html>
+   <body>
+        <form name = "form" enctype = "multipart/form-data" action = "/saved/" method = "POST" >{% csrf_token %}
+            <input type = "text" placeholder = "Name" name = "name" /> 
+            <input type = "file" placeholder = "Picture" name = "picture" />
+            <button type = "submit" value = "Upload" >
+               <strong>Upload</strong>
+            </button>
+        </form>
+   </body>
+</html>
