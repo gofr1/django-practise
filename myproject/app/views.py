@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from random import randint
 from app.models import Article, Images
-from app.forms import ArticleForm, NameForm, PictureUploadForm
+from app.forms import ArticleForm, NameForm, PictureUploadForm, LoginForm
 
 from django.shortcuts import render
 
@@ -102,3 +102,31 @@ def SavePicture(request):
       MyPictureUploaForm = PictureUploadForm()
 		
    return render(request, 'saved.html', locals())
+
+def formView(request):
+   if request.session.has_key('username'):
+      username = request.session['username']
+      return render(request, 'loggedin.html', {"username" : username})
+   else:
+      return render(request, 'login.html', {})
+      
+def login(request):
+   username = 'not logged in'
+   
+   if request.method == 'POST':
+      MyLoginForm = LoginForm(request.POST)
+      
+      if MyLoginForm.is_valid():
+         username = MyLoginForm.cleaned_data['username']
+         request.session['username'] = username
+      else:
+         MyLoginForm = LoginForm()
+			
+   return render(request, 'loggedin.html', {"username" : username})
+   
+def logout(request):
+   try:
+      del request.session['username']
+   except:
+      pass
+   return HttpResponse("<strong>You are logged out.</strong>")
