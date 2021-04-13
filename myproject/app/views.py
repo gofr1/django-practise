@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from datetime import date, datetime
 from django.shortcuts import render, redirect
-
+from django.template import RequestContext
 from random import randint
 from app.models import Article, Images
 from app.forms import ArticleForm, NameForm, PictureUploadForm, LoginForm
@@ -104,9 +104,22 @@ def SavePicture(request):
    return render(request, 'saved.html', locals())
 
 def formView(request):
-   if request.session.has_key('username'):
-      username = request.session['username']
-      return render(request, 'loggedin.html', {"username" : username})
+   #if request.session.has_key('username'):
+   #   username = request.session['username']
+   #   return render(request, 'loggedin.html', {"username" : username})
+   #else:
+   #   return render(request, 'login.html', {})
+   if 'username' in request.COOKIES and 'last_connection' in request.COOKIES:
+      username = request.COOKIES['username']
+      
+      last_connection = request.COOKIES['last_connection']
+      last_connection_time = datetime.strptime(last_connection[:-7], "%Y-%m-%d %H:%M:%S")
+      
+      if (datetime.now() - last_connection_time).seconds < 30: # after 30 second you will need to login again
+         return render(request, 'loggedin.html', {"username" : username})
+      else:
+         return render(request, 'login.html', {})
+			
    else:
       return render(request, 'login.html', {})
       
@@ -122,9 +135,19 @@ def login(request):
       else:
          MyLoginForm = LoginForm()
 			
-   return render(request, 'loggedin.html', {"username" : username})
+   #return render(request, 'loggedin.html', {"username" : username})
+   response = render(request, 'loggedin.html', {"username" : username})
    
+   response.set_cookie('last_connection', datetime.now())
+   response.set_cookie('username', username)
+	
+   return response 
+
 def logout(request):
+   response = HttpResponse("<strong>You are logged out.</strong>")
+   response.delete_cookie('last_connection')
+   response.delete_cookie('username')
+   return response
    try:
       del request.session['username']
    except:
