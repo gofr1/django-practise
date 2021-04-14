@@ -13,6 +13,9 @@ from django.views.generic import TemplateView
 class StaticView(TemplateView):
    template_name = 'static.html'
 
+class HomePageView(TemplateView):
+    template_name = 'generic.html'
+
 def hello(request):
    text = """<h1>Welcome to my app!</h1>"""
    return HttpResponse(text)
