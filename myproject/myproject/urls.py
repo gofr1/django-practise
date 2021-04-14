@@ -23,6 +23,10 @@ from post.views import PostViewSet
 import app.views as av
 from app.models import Article
 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
+from django.conf.urls.static import static
+
 router = SimpleRouter()
 router.register('posts', PostViewSet)
 
@@ -51,4 +55,7 @@ urlpatterns = [
     path('connection/',av.formView),
     path('login/', av.login),
     path('logout/', av.logout),
-]
+    path('home/', av.HomePageView.as_view(), name='home'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += staticfiles_urlpatterns() 
