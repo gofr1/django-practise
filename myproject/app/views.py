@@ -5,7 +5,7 @@ from django.template import RequestContext
 from random import randint
 from app.models import Article, Images
 from app.forms import ArticleForm, NameForm, PictureUploadForm, LoginForm
-
+from django.views.decorators.cache import cache_page
 from django.shortcuts import render
 
 from django.views.generic import TemplateView
@@ -65,6 +65,7 @@ def showForm(request):
 def mainPage(request):
    return redirect(hello)
 
+@cache_page(60 * 15) # 15 minutes
 def searchArticle(request, article_id):
    article = Article.objects.get(article_id = article_id)
    return render(request, 'show-article.html', {'article': article})
