@@ -7,7 +7,7 @@ from app.models import Article, Images
 from app.forms import ArticleForm, NameForm, PictureUploadForm, LoginForm
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render
-
+from django.core.mail import send_mail
 from django.views.generic import TemplateView
 
 class StaticView(TemplateView):
@@ -157,3 +157,12 @@ def logout(request):
    except:
       pass
    return HttpResponse("<strong>You are logged out.</strong>")
+
+def sendSimpleEmail(request, emailto):
+   res = send_mail(
+      subject = 'hello',
+      message = 'world',
+      from_email = 'email@example.com', 
+      recipient_list = [emailto]
+   )
+   return HttpResponse('%s'%res)

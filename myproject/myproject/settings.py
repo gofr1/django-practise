@@ -137,3 +137,7 @@ CACHES = {
         'LOCATION': 'cache_tbl',
     }
 }
+
+# For developing purpose
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
