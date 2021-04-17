@@ -7,7 +7,7 @@ from app.models import Article, Images
 from app.forms import ArticleForm, NameForm, PictureUploadForm, LoginForm
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render
-from django.core.mail import send_mail
+from django.core.mail import send_mail, send_mass_mail
 from django.views.generic import TemplateView
 
 class StaticView(TemplateView):
@@ -165,4 +165,10 @@ def sendSimpleEmail(request, emailto):
       from_email = 'email@example.com', 
       recipient_list = [emailto]
    )
+   return HttpResponse('%s'%res)
+
+def sendMassEmail(request,emailto1,emailto2):
+   msg1 = ('subject 1', 'message 1', 'email@example.com', [emailto1])
+   msg2 = ('subject 2', 'message 2', 'email@example.com', [emailto2])
+   res = send_mass_mail((msg1, msg2), fail_silently = False)
    return HttpResponse('%s'%res)
