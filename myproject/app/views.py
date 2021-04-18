@@ -4,10 +4,10 @@ from django.shortcuts import render, redirect
 from django.template import RequestContext
 from random import randint
 from app.models import Article, Images
-from app.forms import ArticleForm, NameForm, PictureUploadForm, LoginForm
+from app.forms import ArticleForm, NameForm, PictureUploadForm, LoginForm, EmailAdmins
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render
-from django.core.mail import send_mail, send_mass_mail
+from django.core.mail import send_mail, send_mass_mail, mail_admins, mail_managers
 from django.views.generic import TemplateView
 
 class StaticView(TemplateView):
@@ -172,3 +172,23 @@ def sendMassEmail(request,emailto1,emailto2):
    msg2 = ('subject 2', 'message 2', 'email@example.com', [emailto2])
    res = send_mass_mail((msg1, msg2), fail_silently = False)
    return HttpResponse('%s'%res)
+
+def sendAdminsEmail(subject,message):
+   mail_admins(subject, message)
+
+def sendManagersEmail(subject,message):
+   mail_managers(subject, message)
+
+def AdminEmail (request):
+   if request.method == 'POST':
+      form = EmailAdmins(request.POST)
+      if form.is_valid():
+         subject = form.cleaned_data["subject"]
+         message = form.cleaned_data["message"]
+         sendAdminsEmail(subject, message)
+         text = f'Message:<h1>{subject}</h1><p>{message}</p><p>Is sent</p>'
+         return HttpResponse(text)
+   else:
+      form = EmailAdmins()
+
+   return render(request, 'admin-email.html')
