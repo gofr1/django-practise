@@ -141,3 +141,11 @@ CACHES = {
 # For developing purpose
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
+
+# site administrators
+ADMINS = (
+    ('admin', 'admin@example.com'),
+)
+MANAGERS = (
+    ('manager', 'manager@example.com'),
+)
