@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <form name = "form" action = "/admin-email/" method = "POST" >{% csrf_token %}
+            <input type = "text" placeholder = "Enter subject" name = "subject" />
+            <input type = "text" placeholder = "Enter your message" name = "message" />
+            <button type = "submit" value = "Send" >
+                <strong>Send</strong>
+            </button>
+        </form>
+    </body>
+</html>
