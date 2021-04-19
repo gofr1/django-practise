@@ -200,3 +200,14 @@ def sendHTMLEmail(request , emailto):
    email.content_subtype = "html"
    res = email.send()
    return HttpResponse('%s'%res)
+
+def sendEmailWithAttach(request, emailto):
+   html_content = "<h1>Hello world!</h1>"
+   email = EmailMessage("my subject", html_content, "email@example.com", [emailto])
+   email.content_subtype = "html"
+   
+   with open('manage.py', 'r') as fd:
+      email.attach('manage.py', fd.read(), 'text/plain')
+   
+   res = email.send()
+   return HttpResponse('%s'%res)
