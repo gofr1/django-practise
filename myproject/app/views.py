@@ -7,8 +7,9 @@ from app.models import Article, Images
 from app.forms import ArticleForm, NameForm, PictureUploadForm, LoginForm, EmailAdmins
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render
-from django.core.mail import send_mail, send_mass_mail, mail_admins, mail_managers
+from django.core.mail import send_mail, send_mass_mail, mail_admins, mail_managers, EmailMessage
 from django.views.generic import TemplateView
+
 
 class StaticView(TemplateView):
    template_name = 'static.html'
@@ -192,3 +193,10 @@ def AdminEmail (request):
       form = EmailAdmins()
 
    return render(request, 'admin-email.html')
+
+def sendHTMLEmail(request , emailto):
+   html_content = "<strong>Hello world!</strong>"
+   email = EmailMessage("my subject", html_content, "email@example.com", [emailto])
+   email.content_subtype = "html"
+   res = email.send()
+   return HttpResponse('%s'%res)

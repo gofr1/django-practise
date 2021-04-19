@@ -58,7 +58,8 @@ urlpatterns = [
     path('home/', av.HomePageView.as_view(), name='home'),
     re_path(r'^simpleemail/(?P<emailto>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/', av.sendSimpleEmail),
     re_path(r'^massEmail/(?P<emailto1>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/(?P<emailto2>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})', av.sendMassEmail),
-    path('admin-email/', av.AdminEmail)
+    path('admin-email/', av.AdminEmail),
+    re_path(r'^htmlemail/(?P<emailto>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/', av.sendHTMLEmail),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += staticfiles_urlpatterns() 
